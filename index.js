@@ -20,8 +20,14 @@ $(".btn").click(function (e) {
       checkAnswer(solution.length-1);
 
    }
+   else if (!playing) {
+    $("#level-title").text("Level " + level);
+    setTimeout(function(){nextSequence();},1000);
+    playing = true;
+  }
+   }
    
-});
+  );
 
 
 function FlashKey(button) {
@@ -38,7 +44,7 @@ function playSound(button) {
    audio.play();
   }
 
-
+  
    function nextSequence() {
       solution = [];
       level++;
@@ -46,10 +52,29 @@ function playSound(button) {
      
       var randomChosenColour = createSequance();
       sequanceTosolve.push(randomChosenColour);
-    console.log(sequanceTosolve);
-      $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
-      playSound(randomChosenColour);
+     
+    for (var i = 0; i < sequanceTosolve.length ; i++) {
+      let color = sequanceTosolve[i];
+      console.log(color);
+      setTimeout ( function() {
+      $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100);
+      playSound(color); 
     }
+    ,500*i);
+      
+    }
+    }
+  // function nextSequence() {
+  //   solution = [];
+  //   level++;
+  //   $("#level-title").text("Level " + level);
+   
+  //   var randomChosenColour = createSequance();
+  //   sequanceTosolve.push(randomChosenColour);
+  // console.log(sequanceTosolve);
+  //   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+  //   playSound(randomChosenColour);
+  // }
 
 
 function createSequance() {
