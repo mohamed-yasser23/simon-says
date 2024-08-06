@@ -41,6 +41,8 @@ function FlashKey(button) {
 function playSound(button) {
   
    var audio = new Audio("sounds/"+button+".mp3");
+   var volume = audio.volume;
+   audio.volume = 0.05*volume;
    audio.play();
   }
 
